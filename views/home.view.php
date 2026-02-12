@@ -6,7 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css">
 <body class="">
-    <?= $test ?>
     <?php require_once "components/home.header.php"; ?>
     
     <?php require "components/home.table.php" ?>

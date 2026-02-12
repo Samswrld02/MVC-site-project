@@ -12,7 +12,5 @@
             <td><?= $row['title'] ?></td>
             <td><?= $row['rating'] ?></td>
         </tr>
-        
-
     <?php endforeach ?>
 </table>
