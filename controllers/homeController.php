@@ -1,5 +1,5 @@
 <?php
-require_once "./Models/NetlandModel.php";
+
 $test = "hello lmao";
 
 class HomeController {
@@ -9,13 +9,21 @@ class HomeController {
         $this->conn = $conn;
     }
 
-    public function showAll() {
-        echo "works";
-        exit;
+    public function get() {
+        echo "workss";
+        // exit;
         
 
-        $netlandModel = new Netland($this->conn);
+         $model = new Series($this->conn);
+         $databaseArray = $model->get();
         //put data into the view and show view
+        require "./views/home.view.php";
+    }
+
+    //NOTE!: test method for routing
+    public function byId($id) {
+        $model = new Series($this->conn);
+        $databaseArray = $model->ById($id);
         require "./views/home.view.php";
     }
     

@@ -2,12 +2,26 @@
 
 require_once "./Router/routerController.php";
 require_once "./Router/config.php";
+require_once "./Models/seriesModel.php";
+
 
 //inject dependancy into class
 $test = new Router($conn);
 //check if route exists
-if ($test->handleRequest()) {
+
+$request = $test->handleRequest();
+
+if ($request) {
     
-    var_dump($test->handleRequest()->showAll());
+    $routeData = $request;
+    var_dump($routeData);
+
+    $controller = $routeData["route"]["controller"];
+    $method = $routeData["route"]["method"];
+    $id = $routeData["id"] ?? null;
+
+    var_dump($id);
+
+    $controller->$method($id);
 }
 
