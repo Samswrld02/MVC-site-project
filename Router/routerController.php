@@ -31,7 +31,7 @@ class Router {
 
     private function AllowedMethod($rMethod) {
         //take the requested methodn and verify it
-        $allowedMethods = ["get", "details"];
+        $allowedMethods = ["get", "details", "sort"];
         if (in_array($rMethod, $allowedMethods)) {
             return $rMethod;
         } else {
@@ -42,7 +42,7 @@ class Router {
     private function mapControllerMethod($route, $method = null) {
          $routeArray = [
             "home" => ["controller" => "homeController", "method" => $method],
-            "edit" => ["controller" => "editController",  "method" => $method]
+            "edit" => ["controller" => "editController",  "method" => $method],
             ];
 
         if (array_key_exists($route, $routeArray)) {
@@ -87,14 +87,16 @@ class Router {
         $resource = $resources[2] ?? null;
         $subdata = $resources[3] ?? null;
 
-        // var_dump($resource, $subdata);
+       
         // exit;
 
         //check if requested method is allowed
         $method = $this->AllowedMethod($method);
+        //  var_dump( $method);
 
         //check the route, first resource
         $routeData = $this->mapControllerMethod($Route, $method);
+        // var_dump($routeData);
 
         //if invalid route data, redirect home
         if (!$routeData) {

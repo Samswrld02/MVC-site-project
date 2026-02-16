@@ -60,6 +60,29 @@ class HomeController {
         //require description view
         require "./views/description.view.php";
     }
+
+    public function sort($resource, $column, $dir) {
+        //make new query using order by
+        $className = $this->turnToClass($resource);
+        var_dump($resource, $column, $dir);
+        
+        $model = new $className($this->conn);
+        
+        if ($resource != "series") {
+            $arrayMovies = $model->order($resource, $column, $dir);
+            $model2 = new Series($this->conn);
+            $arraySeries = $model2->get("series");
+        } else {
+            $model2 = new Movies($this->conn);
+            $arraySeries = $model->order($resource, $column, $dir);
+            $arrayMovies =$model2->get("movies");
+        }
+        
+        
+        require_once "./views/home.view.php";
+        // exit;
+
+    }
     
 }
 

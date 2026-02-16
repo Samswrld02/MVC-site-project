@@ -14,16 +14,21 @@ $request = $test->handleRequest();
 if ($request) {
     
     $routeData = $request;
-    // var_dump($routeData["sub"]);
+    // var_dump($routeData["route"]);
 
     $controller = $routeData["route"]["controller"];
     $method = $routeData["route"]["method"];
+
+    //ID CAN ALSO be column for direction sorting
     $id = $routeData["sub"]["id"] ?? null;
     $resource = $routeData["sub"]["resource"] ?? null;
+    $dir = $_GET["dir"] ?? NULL;
+    // var_dump($dir);
+    
 
     //header
     require_once "./views/components/BasicViewLayout/header.php";
-    $controller->$method($resource, $id);
+    $controller->$method($resource, $id, $dir);
     require_once "./views/components/BasicViewLayout/footer.php";
 }
 

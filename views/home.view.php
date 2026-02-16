@@ -3,7 +3,7 @@
     <div class="homeContainer">
     <table>
         <tr>
-            <th>Title</th>
+            <th><a href="<?= URLROOT ?>/home/sort/series/title/?dir=ASC">Title</a></th>
             <th>Rating</th>
             <th>Meer info</th>
         </tr>

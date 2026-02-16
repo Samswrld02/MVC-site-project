@@ -42,6 +42,22 @@ class baseModel {
 
         return $result;
     }
+
+    public function order($resource, $title, $dir) {
+        $conn = $this->conn;
+
+        $sql = "SELECT * FROM $resource ORDER BY $title $dir";
+        var_dump($sql);
+        // exit;
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        
+        return $result;
+        
+    }
 }
 
 
