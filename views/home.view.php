@@ -1,9 +1,19 @@
 
     
     <div class="homeContainer">
+        <?php setcookie("dir", "ASC");
+        echo $_COOKIE['dir'];
+
+        if ($_COOKIE['dir'] == "DESC") {
+            $_COOKIE['dir'] = "ASC";
+        } else if ($_COOKIE['dir'] == "ASC") {
+            $_COOKIE['dir'] = "DESC";
+        }
+    
+        ?>
     <table>
         <tr>
-            <th><a href="<?= URLROOT ?>/home/sort/series/title/?dir=ASC">Title</a></th>
+            <th><a href=" <?= URLROOT ?>/home/sort/series/title/?dir=<?= $_COOKIE["dir"] == "ASC" ? "ASC": "DESC"?>">Title</a></th>
             <th>Rating</th>
             <th>Meer info</th>
         </tr>
