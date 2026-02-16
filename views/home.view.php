@@ -1,14 +1,33 @@
-<?php require_once "./Router/config.php"?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?= URLROOT?>/style/style.css" ; ?>>
-<body class="">
-    <?php require_once "components/home.header.php"; ?>
+
     
-    <?php require "components/home.table.php" ?>
-</body>
-</html>
+    
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>\
+            <th>Meer info</th>
+        </tr>
+        <h1>Series</h1>
+        <?php foreach ($arraySeries as $row ) :?> 
+            <tr>
+                <td><?= $row['title'] ?></td>
+                <td><?= $row['rating'] ?></td>
+                <td><a href = "home/details/series/<?= $row['id'] ?>">Details</a></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+    <h1>Movies</h1>
+    <table>
+            <tr>
+                <th>Title</th>
+                <th>Duur</th>
+                <th>Meer info</th>
+            </tr>
+            <?php foreach ($arrayMovies as $row ) :?> 
+                <tr>
+                    <td class = ><?= $row['title'] ?></td>
+                    <td><?= $row['length_in_minutes'] ?></td>
+                    <td><a href = "home/details/series/<?= $row['id'] ?>">Details</a></td>
+                </tr>
+            <?php endforeach ?>
+    </table>

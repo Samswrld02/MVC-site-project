@@ -31,7 +31,7 @@ class Router {
 
     private function AllowedMethod($rMethod) {
         //take the requested methodn and verify it
-        $allowedMethods = ["get", "byId"];
+        $allowedMethods = ["get", "details"];
         if (in_array($rMethod, $allowedMethods)) {
             return $rMethod;
         } else {
@@ -84,7 +84,11 @@ class Router {
         //route to home page if no valid route has been entered
         $Route = $resources[0] ?? "home";
         $method = $resources[1] ?? null;
-        $subdata = $resources[2] ?? null;
+        $resource = $resources[2] ?? null;
+        $subdata = $resources[3] ?? null;
+
+        // var_dump($resource, $subdata);
+        // exit;
 
         //check if requested method is allowed
         $method = $this->AllowedMethod($method);
@@ -98,7 +102,7 @@ class Router {
         }
 
         //return controller and method to index
-        return ["route" => $this->checkMethod($routeData), "id" => $subdata ];
+        return ["route" => $this->checkMethod($routeData), "sub" => ["id" => $subdata, "resource" => $resource]];
         }
     
 

@@ -1,37 +1,49 @@
 <?php
 
-class Series {
-    private $conn;
+class Series extends baseModel{
+    // protected $conn;
 
-public function __construct($conn) {
-    $this->conn = $conn;
-}
-    
-    public function get() {
-        try {
-        $conn = $this->conn;
-        $sql = "SELECT * FROM series";
+    // public function __construct($conn) {
+    //     $this->conn = $conn;
+    // }
 
-        $stmt = $conn->query($sql);
-        $result = $stmt->fetchALL();
+
+    // public function get($resource) {
         
-        return $result;
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
+    //     try {
+           
+            
+    //         $conn = $this->conn;
+    //          var_dump($conn);
+    //          exit;
+    //         $sql = "SELECT * FROM {$resource}";
+            
 
-    public function ById($id) {
-        $conn = $this->conn;
-        $id = intval($id);
+    //         $stmt = $conn->query($sql);
+    //         var_dump($stmt);
+    //         exit;
+    //         $result = $stmt->fetchALL();
+
+    //         var_dump($result);
+            
+        
+    //     return $result;
+    //     } catch (Exception $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
+
+    // public function ById($id) {
+    //     $conn = $this->conn;
+    //     $id = intval($id);
     
 
-        $sql = "SELECT * FROM  series WHERE id = :id";
+    //     $sql = "SELECT * FROM  series WHERE id = :id";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(["id"=>$id]);
-        $result = $stmt->fetchALL();
+    //     $stmt = $conn->prepare($sql);
+    //     $stmt->execute(["id"=>$id]);
+    //     $result = $stmt->fetchALL();
 
-        return $result;
-    }
+    //     return $result;
+    // }
 }

@@ -14,14 +14,16 @@ $request = $test->handleRequest();
 if ($request) {
     
     $routeData = $request;
-    var_dump($routeData);
+    // var_dump($routeData["sub"]);
 
     $controller = $routeData["route"]["controller"];
     $method = $routeData["route"]["method"];
-    $id = $routeData["id"] ?? null;
+    $id = $routeData["sub"]["id"] ?? null;
+    $resource = $routeData["sub"]["resource"] ?? null;
 
-    var_dump($id);
-
-    $controller->$method($id);
+    //header
+    require_once "./views/components/BasicViewLayout/header.php";
+    $controller->$method($resource, $id);
+    require_once "./views/components/BasicViewLayout/footer.php";
 }
 
