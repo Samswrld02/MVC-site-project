@@ -29,11 +29,19 @@ a:hover {
 }
 
 .buttonReturn {
-    margin-left: 70vw;
+    margin-left: 70vw; 
     padding: 0.5rem;
     border: 1px solid;
     border-radius: 4px;
     background-color: grey;
+}
+
+.editButton {
+    padding: 0.5rem;
+    border: 1px solid;
+    border-radius: 4px;
+    background-color: grey;
+
 }
 
 .descriptionHeader {
@@ -49,3 +57,14 @@ a:hover {
     display: flex;
     flex-direction: column;
 }
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+.formContainer {
+    display: flex;
+    justify-content: center;
+}
+

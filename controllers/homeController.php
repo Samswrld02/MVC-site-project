@@ -3,9 +3,6 @@ require_once "./Models/baseModel.php";
 require_once "./Models/seriesModel.php";
 require_once "./Models/moviesModel.php";
 
-
-$test = "hello lmao";
-
 class HomeController {
     private  $conn;
 
@@ -13,11 +10,12 @@ class HomeController {
         $this->conn = $conn;
     }
 
-    private function turnToClass($resource) {
+    protected function turnToClass($resource) {
         return ucfirst($resource);
     }
 
     public function get() {
+
         $model = new Series($this->conn);
         $arraySeries = $model->get('series');
 
@@ -61,6 +59,7 @@ class HomeController {
         //make new query using order by
         $className = $this->turnToClass($resource);
         
+        
         $model = new $className($this->conn);
         
         if ($resource != "series") {
@@ -76,7 +75,6 @@ class HomeController {
         
         require_once "./views/home.view.php";
         // exit;
-
     }
     
 }

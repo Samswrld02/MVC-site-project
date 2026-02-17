@@ -2,6 +2,7 @@
 
 require_once "./Database/DatabaseClass.php";
 require_once "./controllers/homeController.php";
+require_once "./controllers/editController.php";
 // require_once "./Router/config.php";
 
 class Router {
@@ -32,7 +33,7 @@ class Router {
 
     private function AllowedMethod($rMethod) {
         //take the requested methodn and verify it
-        $allowedMethods = ["get", "details", "sort"];
+        $allowedMethods = ["get","sort", "details", "update", "edit", "show"];
         if (in_array($rMethod, $allowedMethods)) {
             return $rMethod;
         } else {

@@ -56,6 +56,47 @@ class baseModel {
         return $result;
         
     }
+
+    //get data for edit form
+    public function display($resource, $id) {
+        $conn = $this->conn;
+        
+
+        $sql = "SELECT * FROM $resource WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->execute(["id"=>$id]);
+
+        return $stmt->fetchAll();
+    }
+
+    //update data based on form input
+    public function update($resource, $dataArray, $id) {
+        $conn = $this->conn;
+        $substringContainer = [];
+
+        //loop through array
+
+        foreach ($dataArray as $key => $value) {
+            $substring = "$key = :$key";
+            array_push($substringContainer, $substring);
+        }
+        // var_dump($substringContainer);
+        $preparedStatement = implode(", ", $substringContainer);
+
+        $dataArray['id'] = intval($id);
+
+        var_dump($dataArray);
+       
+
+        $sql = "UPDATE $resource SET $preparedStatement WHERE id = :id";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($dataArray);
+
+        return ["result" => "update successful"];
+    }
 }
 
 
