@@ -18,14 +18,10 @@ class HomeController {
     }
 
     public function get() {
-        echo "workss";
-        // exit;
-        
-
-         $model = new Series($this->conn);
+        $model = new Series($this->conn);
         $arraySeries = $model->get('series');
 
-         $modelM = new Movies($this->conn);
+        $modelM = new Movies($this->conn);
         $arrayMovies = $modelM->get("movies");
 
 
@@ -64,7 +60,6 @@ class HomeController {
     public function sort($resource, $column, $dir) {
         //make new query using order by
         $className = $this->turnToClass($resource);
-        var_dump($resource, $column, $dir);
         
         $model = new $className($this->conn);
         

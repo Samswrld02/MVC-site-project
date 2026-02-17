@@ -47,8 +47,6 @@ class baseModel {
         $conn = $this->conn;
 
         $sql = "SELECT * FROM $resource ORDER BY $title $dir";
-        var_dump($sql);
-        // exit;
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();

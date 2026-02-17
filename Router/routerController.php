@@ -12,10 +12,11 @@ class Router {
 
 
     private function constructRoute() {
-        //map route to correct controller
-        //router inlezen
-        $uri = trim($_SERVER['REQUEST_URI'], "/");
 
+        
+        //WORKING CODE ->
+        $uri = trim($_SERVER['REQUEST_URI'], "/");
+        
         $resources = explode("/", $uri);
 
         //set remove directory
