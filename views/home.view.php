@@ -13,8 +13,8 @@
     
     <table>
         <tr>
-            <th><a href=" <?= URLROOT ?>/home/sort/series/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title<?= $dir == "ASC" ? "^" : "⌄" ?></a></th>
-            <th><a href="<?= URLROOT ?>/home/sort/series/rating/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating<?= $dir == "ASC" ? "^" : "⌄" ?></a></th>
+            <th><a href=" <?= URLROOT ?>/home/sort/series/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+            <th><a href="<?= URLROOT ?>/home/sort/series/rating/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating</a></th>
             <th>Meer info</th>
         </tr>
         <h1>Series</h1>
@@ -31,18 +31,18 @@
     <h1>Movies</h1>
     <table>
             <tr>
-                <th><a href=" <?= URLROOT ?>/home/sort/movies/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title<?= $dir == "ASC" ? "^" : "⌄" ?></a></th>
-                <th><a href="<?= URLROOT ?>/home/sort/movies/length_in_minutes/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur<?= $dir == "ASC" ? "^" : "⌄" ?></a></th>
+                <th><a href=" <?= URLROOT ?>/home/sort/movie/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+                <th><a href="<?= URLROOT ?>/home/sort/movie/length_in_minutes/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur</a></th>
                 <th>Meer info</th>
             </tr>
             <?php foreach ($arrayMovies as $row ) :?> 
                 <tr>
                     <td class = ><?= $row['title'] ?></td>
                     <td><?= $row['length_in_minutes'] ?></td>
-                    <td><a href = "<?=  URLROOT ?>/home/details/movies/<?= $row['id'] ?>">Details</a></td>
+                    <td><a href = "<?=  URLROOT ?>/home/details/movie/<?= $row['id'] ?>">Details</a></td>
                 </tr>
             <?php endforeach ?>
             
     </table>
-    <a class="addButton" href="<?= URLROOT ?>/add/show/movies">Add new Movie</a>
+    <a class="addButton" href="<?= URLROOT ?>/add/show/movie">Add new Movie</a>
     </div>

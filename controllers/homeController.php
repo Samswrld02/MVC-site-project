@@ -19,8 +19,12 @@ class HomeController {
         $model = new Series($this->conn);
         $arraySeries = $model->get('series');
 
-        $modelM = new Movies($this->conn);
-        $arrayMovies = $modelM->get("movies");
+        $modelM = new Movie($this->conn);
+        $arrayMovies = $modelM->get("movie");
+
+    
+
+        
 
 
         //put data into the view and show view
@@ -28,7 +32,7 @@ class HomeController {
     }
 
     private function checkSubData($resource, $id) {
-        $allowedResources = ["movies", "series"];
+        $allowedResources = ["movie", "series"];
 
         if (!in_array($resource, $allowedResources)) {
             return 0;
@@ -66,10 +70,12 @@ class HomeController {
             $arrayMovies = $model->order($resource, $column, $dir);
             $model2 = new Series($this->conn);
             $arraySeries = $model2->get("series");
+
+            
         } else {
-            $model2 = new Movies($this->conn);
+            $model2 = new Movie($this->conn);
             $arraySeries = $model->order($resource, $column, $dir);
-            $arrayMovies =$model2->get("movies");
+            $arrayMovies =$model2->get("movie");
         }
         
         

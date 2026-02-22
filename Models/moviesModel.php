@@ -1,5 +1,4 @@
 <?php
 
-class Movies extends baseModel {
-   
+class Movie extends baseModel {
 }

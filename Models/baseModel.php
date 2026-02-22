@@ -12,7 +12,7 @@ class baseModel {
             $conn = $this->conn;
             //  var_dump($conn);
             //  exit;
-            $sql = "SELECT * FROM {$resource}";
+            $sql = "SELECT * FROM MEDIA WHERE media = '$resource'";
             
 
             $stmt = $conn->query($sql);
@@ -34,7 +34,7 @@ class baseModel {
         $id = intval($id);
     
 
-        $sql = "SELECT * FROM  {$resource} WHERE id = :id";
+        $sql = "SELECT * FROM  MEDIA WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute(["id"=>$id]);
@@ -46,7 +46,7 @@ class baseModel {
     public function order($resource, $title, $dir) {
         $conn = $this->conn;
 
-        $sql = "SELECT * FROM $resource ORDER BY $title $dir";
+        $sql = "SELECT * FROM MEDIA WHERE media = '$resource' ORDER BY $title $dir";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -102,13 +102,18 @@ class baseModel {
         $conn = $this->conn;
         
 
-        $sql = "SELECT * FROM $resource";
+        $sql = "SELECT * FROM MEDIA WHERE media = '$resource'";
+        var_dump($sql);
+        exit;
 
         $stmt = $conn->prepare($sql);
+        
 
         $stmt->execute();
 
-        return $stmt->fetchAll();
+        var_dump($stmt->fetchAll());
+        exit;
+        return;
 
     }
 
