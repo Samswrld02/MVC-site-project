@@ -27,7 +27,6 @@
         <?php endforeach ?>
         
     </table>
-    <a class="addButton" href="<?= URLROOT ?>/add/show/series">Add new Series</a>
     <h1>Movies</h1>
     <table>
             <tr>
@@ -44,5 +43,5 @@
             <?php endforeach ?>
             
     </table>
-    <a class="addButton" href="<?= URLROOT ?>/add/show/movie">Add new Movie</a>
+    <a class="addButton" href="<?= URLROOT ?>/add/show/movie">Add new media</a>
     </div>

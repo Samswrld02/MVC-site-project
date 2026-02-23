@@ -103,17 +103,15 @@ class baseModel {
         
 
         $sql = "SELECT * FROM MEDIA WHERE media = '$resource'";
-        var_dump($sql);
-        exit;
+        // var_dump($sql);
+        // exit;
 
         $stmt = $conn->prepare($sql);
         
 
         $stmt->execute();
 
-        var_dump($stmt->fetchAll());
-        exit;
-        return;
+        return $stmt->fetchAll();
 
     }
 
@@ -136,7 +134,7 @@ class baseModel {
         
 
 
-        $sql = "INSERT INTO $resource ($columnStatement) VALUES ($valueStatement)";
+        $sql = "INSERT INTO MEDIA ($columnStatement) VALUES ($valueStatement)";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute($data);
