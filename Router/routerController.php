@@ -4,6 +4,7 @@ require_once "./Database/DatabaseClass.php";
 require_once "./controllers/homeController.php";
 require_once "./controllers/editController.php";
 require_once "./controllers/addController.php";
+require_once "./authentication/authentication.controller.php";
 // require_once "./Router/config.php";
 
 class Router {
@@ -34,7 +35,7 @@ class Router {
 
     private function AllowedMethod($rMethod) {
         //take the requested methodn and verify it
-        $allowedMethods = ["get","sort", "details", "update", "edit", "show", "add"];
+        $allowedMethods = ["get","sort", "details", "update", "edit", "show", "add", "login"];
         if (in_array($rMethod, $allowedMethods)) {
             return $rMethod;
         } else {
@@ -44,6 +45,7 @@ class Router {
 
     private function mapControllerMethod($route, $method = null) {
          $routeArray = [
+            "/" => ["controller" => "authentication", "method" => $method],
             "home" => ["controller" => "homeController", "method" => $method],
             "edit" => ["controller" => "editController",  "method" => $method],
             "add" => [ "controller" => "addController", "method" => $method]
@@ -54,7 +56,6 @@ class Router {
             $request = $routeArray[$route]["controller"];
             $controller = new $request($this->conn);
             $method = $routeArray[$route]["method"];
-
             return ["controller" => $controller, "method" => $method];
             
         } else {
@@ -86,8 +87,8 @@ class Router {
         $resources = $this->constructRoute();
 
         //route to home page if no valid route has been entered
-        $Route = $resources[0] ?? "home";
-        $method = $resources[1] ?? null;
+        $Route = $resources[0] ?? "/";
+        $method = $resources[1] ?? "login";
         $resource = $resources[2] ?? null;
         $subdata = $resources[3] ?? null;
 

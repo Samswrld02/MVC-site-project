@@ -27,8 +27,7 @@ class Database
             try {
                 self::$connection = new PDO(self::$dsn, self::$user, self::$pw, self::$options);
             } catch (PDOException $e) {
-                header("Content-Type: application/json");
-                echo json_encode($e->getMessage());
+                echo PHP_EOL . "connection failed!: ". $e->getMessage();
                 exit;
             }
         }

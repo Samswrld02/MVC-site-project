@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once "./Router/routerController.php";
 require_once "./Router/config.php";
