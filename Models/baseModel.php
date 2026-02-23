@@ -62,7 +62,7 @@ class baseModel {
         $conn = $this->conn;
         
 
-        $sql = "SELECT * FROM $resource WHERE id = :id";
+        $sql = "SELECT * FROM MEDIA WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
 
@@ -90,7 +90,7 @@ class baseModel {
         // var_dump($dataArray);
        
 
-        $sql = "UPDATE $resource SET $preparedStatement WHERE id = :id";
+        $sql = "UPDATE MEDIA SET $preparedStatement WHERE id = :id";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute($dataArray);
