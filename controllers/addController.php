@@ -11,7 +11,6 @@ class AddController extends HomeController {
     }
 
     public function show($resource) {
-        echo "shows $resource";
         //call model for dynamic form creation
         $model = $this->turnToClass($resource);
         $model = new $model($this->conn);
