@@ -28,13 +28,15 @@ class Router {
             return $routeArray[$route];
         }
 
-        //regex matching for wildcard
-        foreach ($routeArray as $droute => $controllerdata) {
-            $pattern = preg_replace('/\{[a-zA-Z0-9]+\}/', '([^/]+)', $droute);
-            $fpattern = "#^" . $pattern . "$#";
+        //regex matching for wildcard,if current route contains wildcard
+        foreach ($routeArray as $routeA => $controllerdata) {
+            //make pattern by replacing wildcards
+            //example route => /home/{resource}/{id}
+            $unfinishedPattern = preg_replace("#\{[^/}]+\}#", "([^/]+)", $routeA);
 
-            if (preg_match($fpattern, $route, $matches)) {
-                //put data into returned array
+            $pattern = "#^" . $unfinishedPattern . "$#";
+
+            if (preg_match($pattern, $route, $matches)) {
                 array_shift($matches);
                 $this->matches = $matches;
 
@@ -46,6 +48,8 @@ class Router {
         $location = URLROOT;
         header("Location: $location");
         exit;
+
+        
     }
 
     //route instatiating 
