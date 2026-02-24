@@ -13,8 +13,8 @@
     
     <table>
         <tr>
-            <th><a href=" <?= URLROOT ?>/home/sort/series/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
-            <th><a href="<?= URLROOT ?>/home/sort/series/rating/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating</a></th>
+            <th><a href=" <?= URLROOT ?>/sort/series/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+            <th><a href="<?= URLROOT ?>/sort/series/rating/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating</a></th>
             <th>Meer info</th>
         </tr>
         <h1>Series</h1>
@@ -22,7 +22,7 @@
             <tr>
                 <td><?= $row['title'] ?></td>
                 <td><?= $row['rating'] ?></td>
-                <td><a href = "<?=  URLROOT ?>/home/details/series/<?= $row['id'] ?>">Details</a></td>
+                <td><a href = "<?=  URLROOT ?>/details/series/<?= $row['id'] ?>">Details</a></td>
             </tr>
         <?php endforeach ?>
         
@@ -30,15 +30,15 @@
     <h1>Movies</h1>
     <table>
             <tr>
-                <th><a href=" <?= URLROOT ?>/home/sort/movie/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
-                <th><a href="<?= URLROOT ?>/home/sort/movie/length_in_minutes/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur</a></th>
+                <th><a href=" <?= URLROOT ?>/sort/movie/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+                <th><a href="<?= URLROOT ?>/sort/movie/length_in_minutes/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur</a></th>
                 <th>Meer info</th>
             </tr>
             <?php foreach ($arrayMovies as $row ) :?> 
                 <tr>
                     <td class = ><?= $row['title'] ?></td>
                     <td><?= $row['length_in_minutes'] ?></td>
-                    <td><a href = "<?=  URLROOT ?>/home/details/movie/<?= $row['id'] ?>">Details</a></td>
+                    <td><a href = "<?=  URLROOT ?>/details/movie/<?= $row['id'] ?>">Details</a></td>
                 </tr>
             <?php endforeach ?>
             

@@ -8,110 +8,99 @@ require_once "./authentication/authentication.controller.php";
 // require_once "./Router/config.php";
 
 class Router {
+    private static $postRoutes;
+    private static $getRoutes;
     private $conn;
+    private $matches = [];
     public function __construct($conn) {
         $this->conn = $conn;
+        self::$postRoutes = [];
+        self::$getRoutes = [];
     }
 
-
-    private function constructRoute() {
-
-        
-        //WORKING CODE ->
-        $uri = trim($_SERVER['REQUEST_URI'], "/");
-        
-        $resources = explode("/", $uri);
-
-        //set remove directory
-        $remove = $resources[0] ?? null;
-        $resourcesUnfinished = array_diff($resources, ["$remove"] );
-
-        //reset indexes
-        $resourcesF = array_values($resourcesUnfinished);
-
-        return $resourcesF;
-
+    private static function assocPush($array, $key, $value) {
+        $array[$key] = $value;
+        return $array;
     }
 
-    private function AllowedMethod($rMethod) {
-        //take the requested methodn and verify it
-        $allowedMethods = ["get","sort", "details", "update", "edit", "show", "add", "login"];
-        if (in_array($rMethod, $allowedMethods)) {
-            return $rMethod;
-        } else {
-            return null;
-        }
-    }
-
-    private function mapControllerMethod($route, $method = null) {
-         $routeArray = [
-            "/" => ["controller" => "authentication", "method" => $method],
-            "home" => ["controller" => "homeController", "method" => $method],
-            "edit" => ["controller" => "editController",  "method" => $method],
-            "add" => [ "controller" => "addController", "method" => $method]
-            ];
-
+    private function match($route, $routeArray) {
         if (array_key_exists($route, $routeArray)) {
-            //dynamically create controller
-            $request = $routeArray[$route]["controller"];
-            $controller = new $request($this->conn);
-            $method = $routeArray[$route]["method"];
-            return ["controller" => $controller, "method" => $method];
-            
-        } else {
-            //return home page redirect if route doesnt exists
-            return  0;
-            
+            return $routeArray[$route];
         }
 
-    }
+        //regex matching for wildcard
+        foreach ($routeArray as $droute => $controllerdata) {
+            $pattern = preg_replace('/\{[a-zA-Z0-9]+\}/', '([^/]+)', $droute);
+            $fpattern = "#^" . $pattern . "$#";
 
-    private function checkMethod ($routeData) {
-        $controller = $routeData["controller"];
-        $method = $routeData["method"];
+            if (preg_match($fpattern, $route, $matches)) {
+                //put data into returned array
+                array_shift($matches);
+                $this->matches = $matches;
 
-        //check if method has been set and if it exists for that class
-        if ($method && method_exists($controller, $method)) {
-            return ["controller" => $controller, "method" => $method];
-        } else {
-            //map home page route for redirecting
-            return ["controller" => $controller, "method" => "get"];
+                return $controllerdata;
+            }
         }
 
+        //redirect to home page or login page //redirect to home page or login page
+        $location = URLROOT;
+        header("Location: $location");
+        exit;
     }
 
-    
-    
+    //route instatiating 
+
+    public static function route($method, $route, $arrayControllerMethod) {
+        //map route to controller + method
+        // $routeMap = $route => $arrayControllerMethod;
+        switch($method) {
+            case "POST":
+                self::$postRoutes = self::assocPush(self::$postRoutes, $route, $arrayControllerMethod);
+                break;
+            case "GET":
+                self::$getRoutes = self::assocPush(self::$getRoutes, $route, $arrayControllerMethod);
+                break;
+        }  
+    }
+
+
+
     public function handleRequest() {
-
-        $resources = $this->constructRoute();
-
-        //route to home page if no valid route has been entered
-        $Route = $resources[0] ?? "/";
-        $method = $resources[1] ?? "login";
-        $resource = $resources[2] ?? null;
-        $subdata = $resources[3] ?? null;
-
+        //get the route 
+        $route = $_SERVER['PATH_INFO'] ?? "/";
+        // echo $route;
        
-        // exit;
+        //match route
 
-        //check if requested method is allowed
-        $method = $this->AllowedMethod($method);
-        //  var_dump( $method);
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case "POST" :
+                $routeData = $this->match($route, self::$postRoutes);
+                foreach ($routeData as $controller => $method) {
+                    $controller = new $controller($this->conn);
+                    $method = $method;
+                    call_user_func_array([$controller, $method], $this->matches);
+                    
+                }
 
-        //check the route, first resource
-        $routeData = $this->mapControllerMethod($Route, $method);
-        // var_dump($routeData);
-
-        //if invalid route data, redirect home
-        if (!$routeData) {
-            $routeData = $this->mapControllerMethod("home", "get");
+                break;
+            case "GET": 
+                $routeData = $this->match($route, self::$getRoutes);
+                foreach ($routeData as $controller => $method) {
+                    $controller = new $controller($this->conn);
+                    $method = $method ?? null;
+                    call_user_func_array([$controller, $method], $this->matches);
+                }
+                break;
         }
+        
+        
 
-        //return controller and method to index
-        return ["route" => $this->checkMethod($routeData), "sub" => ["id" => $subdata, "resource" => $resource]];
-        }
-    
+        // }
+    }
+
+    public function getRoute() {
+        var_dump(self::$getRoutes);
+    }
 
 }
 
