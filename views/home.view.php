@@ -13,8 +13,8 @@
     
     <table>
         <tr>
-            <th><a href=" <?= URLROOT ?>/sort/series/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
-            <th><a href="<?= URLROOT ?>/sort/series/rating/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating</a></th>
+            <th><a href=" <?= URLROOT ?>/sort/series/title/<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+            <th><a href="<?= URLROOT ?>/sort/series/rating/<?= $dir == "ASC" ? "DESC" : "ASC"?>">Rating</a></th>
             <th>Meer info</th>
         </tr>
         <h1>Series</h1>
@@ -30,8 +30,8 @@
     <h1>Movies</h1>
     <table>
             <tr>
-                <th><a href=" <?= URLROOT ?>/sort/movie/title/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
-                <th><a href="<?= URLROOT ?>/sort/movie/length_in_minutes/?dir=<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur</a></th>
+                <th><a href=" <?= URLROOT ?>/sort/movie/title/<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>
+                <th><a href="<?= URLROOT ?>/sort/movie/length_in_minutes/<?= $dir == "ASC" ? "DESC" : "ASC"?>">Duur</a></th>
                 <th>Meer info</th>
             </tr>
             <?php foreach ($arrayMovies as $row ) :?> 
