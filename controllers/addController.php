@@ -10,24 +10,30 @@ class AddController extends HomeController {
         $this->conn = $conn;
     }
 
-    public function show($resource) {
+    public function show() {
         //call model for dynamic form creation
-        $model = $this->turnToClass($resource);
+        $model = $this->turnToClass("series");
         $model = new $model($this->conn);
-        $results = $model->showAddForm($resource);
+        $results = $model->showAddForm("series");
         //display form view
         require_once "./views/add.view.php";
     }
 
-    public function add($resource) {
+    public function add() {
+        $resource = $_POST['media'];
         $_POST;
         echo $resource;
+        
 
         //run model for adding entry
         $model = $this->turnToClass($resource);
         $model = new $model($this->conn);
 
         $model->add($resource, $_POST);
+
+        $location = URLROOT;
+        header("Location: $location");
+        exit;
     }
         
     

@@ -43,5 +43,5 @@
             <?php endforeach ?>
             
     </table>
-    <a class="addButton" href="<?= URLROOT ?>/add/show/movie">Add new media</a>
+    <a class="addButton" href="<?= URLROOT ?>/add">Add new media</a>
     </div>

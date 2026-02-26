@@ -13,4 +13,6 @@ Router::route("GET", "/details/movie/{id}", ["homecontroller" => "details"]);
 Router::route("GET", "/sort/{resource}/{column}/{dir}", ["homecontroller" => "sort"]);
 Router::route("GET", "/edit/{resource}/{id}", ["editcontroller" => "show"]);
 Router::route("POST", "/update/{resource}/{id}", ["editcontroller" => "update"]);
+Router::route("GET", "/add", ["addcontroller" => "show"]);
+Router::route("POST", "/add", ["addcontroller" => "add"]);
 

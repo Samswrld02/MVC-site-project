@@ -1,6 +1,6 @@
 <h1></h1>
 <div class="formContainer">
-    <form method="POST" action="<?= URLROOT ?>/add/add/movie" class ="editForm">
+    <form method="POST" action="<?= URLROOT ?>/add" class ="editForm">
         <?php foreach ($results[0] as $key => $value) :?>
             <?php if ($key != "id") : ?>
                 <?php if ($key == "media") : ?>
