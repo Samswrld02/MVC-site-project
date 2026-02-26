@@ -44,9 +44,9 @@ class Router {
             }
         }
 
-        //redirect to home page or login page //redirect to home page or login page
-        $location = URLROOT;
-        header("Location: $location");
+        //redirect to 404 page if route doesnt exist
+        http_response_code(404); 
+        include_once("./views/responsecode.view.php/404.view.php");
         exit;
 
         
@@ -83,7 +83,6 @@ class Router {
                     $controller = new $controller($this->conn);
                     $method = $method;
                     call_user_func_array([$controller, $method], $this->matches);
-                    
                 }
 
                 break;

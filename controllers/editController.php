@@ -28,14 +28,14 @@ class EditController extends HomeController {
 
     //method for updating data in database
     public function update($resource, $id) {
-        // var_dump($_POST);
 
         //call model for update
         $model = $this->turnToClass($resource);
         $model = new $model($this->conn);
 
         $message = $model->update($resource, $_POST, $id);
-        echo $message['result'];
-        header("Location: /mvc--style/");
+        //session variable for update message
+        $location = URLROOT;
+        header("Location: $location/");
     }
 }

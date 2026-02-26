@@ -73,6 +73,7 @@ class baseModel {
 
     //update data based on form input
     public function update($resource, $dataArray, $id) {
+
         $conn = $this->conn;
         $substringContainer = [];
 
