@@ -31,7 +31,7 @@ class AddController extends HomeController {
         $model->add($resource, $_POST);
 
         $location = URLROOT;
-        header("Location: $location");
+        // header("Location: $location");
         exit;
     }
         
