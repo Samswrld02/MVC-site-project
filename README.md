@@ -1,39 +1,36 @@
-# 📺 Media Tracker MVC Framework
+# 📺 Media Tracker - Custom MVC Framework
 
-Een custom-built PHP MVC framework voor het beheren van een media-bibliotheek (series en films). Dit project is vanaf de basis opgebouwd om de architectuur van moderne frameworks zoals Laravel te doorgronden en toe te passen.
+Een back-end project gericht op de fundamenten van PHP architectuur. Dit project simuleert de core-functionaliteiten van moderne frameworks door middel van een custom routing engine, middleware beveiliging en terminal-based database tools.
 
+## 🛠 Kernfunctionaliteiten
 
+### 1. Regex Routing Engine
+De applicatie maakt gebruik van een custom router die URL-patronen matcht middels reguliere expressies. Dit staat dynamische routes toe zoals `/details/{resource}/{id}`, waarbij de parameters direct worden doorgegeven aan de juiste controller-methode.
 
-## 🚀 Key Features
+### 2. Base Controller & Middleware
+Om redundante code te voorkomen, is er gekozen voor een **Inheritance-based security model**:
+* **HomeController:** Functioneert als base class. De constructor bevat de `AuthenticationMiddleWare`.
+* **Child Controllers:** Alle beveiligde pagina's (Add, Edit, Home) overerven van de HomeController. Hierdoor is elke route by default beveiligd zonder dat er in elke methode een check nodig is.
 
-* **Custom Regex Router:** Een krachtige routing engine die wildcards en dynamische URL-parameters ondersteunt (bijv. `/details/{resource}/{id}`).
-* **Gecentraliseerde Middleware:** Beveiliging via een **Base Controller-patroon**. De `HomeController` constructor fungeert als "gatekeeper" voor alle onderliggende controllers via overerving.
-* **CLI Database Suite:**
-    * **Migrations:** Geautomatiseerd database-schema beheer via `migrate.php`.
-    * **Factory Seeder:** Razendsnel testdata genereren via de terminal, inclusief ondersteuning voor variabelen via `$argv`.
-* **Dynamic Class Loading:** Slimme class-resolutie (`turnToClass`) om resources automatisch te koppelen aan de juiste Models en Controllers.
-* **Volledige Auth Flow:** Veilig inlogsysteem met sessiebeheer en een geïntegreerde logout-procedure.
+### 3. CLI Development Tools
+Voor een efficiënte workflow zijn er twee command-line tools ontwikkeld:
+* **Migrations (`migrate.php`):** Een systeem dat op basis van configuratie-arrays automatisch database-tabellen aanmaakt en beheert.
+* **Factory Seeder (`seed.php`):** Genereert razendsnel testdata. Gebruikt `$argv` voor dynamische input in de terminal (bijv. `php seed.php 20`).
 
----
-
-## 🛠 Gebruikte Technieken
-
-* **PHP 8.0** (Object-Oriented Programming, PDO, Sessions)
-* **Regex** (Gebruikt voor URL-parsing en Factory template parsing)
-* **MySQL**
-* **MVC Design Pattern**
+### 4. Dynamische Data Koppeling
+Middels de `turnToClass` helper-methode worden URL-strings dynamisch omgezet naar Class-instantiaties. Dit zorgt voor een flexibele koppeling tussen de verschillende media-resources (films/series) en de onderliggende Models.
 
 ---
 
 ## 📂 Project Structuur
 
 ```text
-├── authentication/    # Login controller & Middleware logica
-├── controllers/       # Controllers (Add, Edit, Home overerven van Base)
-├── Models/            # Database interactie & Business logica
-├── migrations/        # Database schema definities & Migration class
-├── factory/           # Seeder configuratie en Factory engine
-├── views/             # De UI templates (HTML/PHP)
-├── Router/            # De core routing engine
-├── migrate.php        # CLI entry point voor migraties
-└── seed.php           # CLI entry point voor seeding
+├── authentication/    # Sessie-beheer & Auth logica
+├── controllers/       # Controllers (Add, Edit, Home)
+├── Models/            # Database queries & Business logica
+├── migrations/        # Tabel-definities & Migration engine
+├── factory/           # Seeder configuratie & Seeder engine
+├── views/             # PHP/HTML Templates
+├── Router/            # Core routing logica
+├── migrate.php        # CLI entry voor migraties
+└── seed.php           # CLI entry voor seeding
