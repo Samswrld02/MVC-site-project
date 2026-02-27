@@ -3,16 +3,13 @@ require_once "./controllers/homeController.php";
 require_once "./Models/baseModel.php";
 require_once "./Models/seriesModel.php";
 require_once "./Models/moviesModel.php";
+require_once "./authentication/login.controller.php";
 
 class EditController extends HomeController {
-    private $conn;
-
-    public function __construct($conn) {
-        $this->conn = $conn;
-    }
 
     //display editing view
     public function show($resource, $id) {
+        
         //call method for extracting form data  
         $model = $this->turnToClass($resource);
         $model = new $model($this->conn);
@@ -36,6 +33,6 @@ class EditController extends HomeController {
         $message = $model->update($resource, $_POST, $id);
         //session variable for update message
         $location = URLROOT;
-        header("Location: $location/");
+        header("Location: $location/home");
     }
 }

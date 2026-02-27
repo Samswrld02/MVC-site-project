@@ -6,5 +6,7 @@
     <title>netland</title>
     <link rel="stylesheet" href="<?= URLROOT?>/style/style.css" ; ?>
 </head>
-    <h1><?=  "Welkom op het netland beheerders paneel!" ?></h1>
+    <?php if (isset($_SESSION['user'])) : ?>
+        <h1><?=  "Welkom op het netland beheerders paneel!" ?></h1>
+    <?php endif ?>
 <body>

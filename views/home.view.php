@@ -11,6 +11,10 @@
        }
        ?>
     
+    <h2>Welcome: <?= $_SESSION['user'] ?></h2>
+
+    <a href="<?= URLROOT ?>/ ">Logout</a>
+    
     <table>
         <tr>
             <th><a href=" <?= URLROOT ?>/sort/series/title/<?= $dir == "ASC" ? "DESC" : "ASC"?>">Title</a></th>

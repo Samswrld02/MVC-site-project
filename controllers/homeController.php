@@ -2,12 +2,14 @@
 require_once "./Models/baseModel.php";
 require_once "./Models/seriesModel.php";
 require_once "./Models/moviesModel.php";
+require_once "./authentication/login.controller.php";
 
 class HomeController {
-    private  $conn;
+    protected  $conn;
 
     public function __construct($conn) {
         $this->conn = $conn;
+        Login::AuthenticationMiddleWare();
     }
 
     protected function turnToClass($resource) {
@@ -15,17 +17,13 @@ class HomeController {
     }
 
     public function get() {
+        
 
         $model = new Series($this->conn);
         $arraySeries = $model->get('series');
 
         $modelM = new Movie($this->conn);
         $arrayMovies = $modelM->get("movie");
-
-    
-
-        
-
 
         //put data into the view and show view
         require "./views/home.view.php";
@@ -41,6 +39,8 @@ class HomeController {
 
     //NOTE!: test method for description view
     public function details($resource, $id) {
+        
+        
         //check if id or resource was provided
         $check = $this->checkSubData($resource, $id);
 
@@ -60,6 +60,8 @@ class HomeController {
     }
 
     public function sort($resource, $column, $dir) {
+        
+
         //make new query using order by
         $className = $this->turnToClass($resource);
         
@@ -78,12 +80,9 @@ class HomeController {
             $arrayMovies =$model2->get("movie");
         }
         
-        
         require_once "./views/home.view.php";
-        // exit;
     }
     
 }
 
-$databaseArray = [["title" => "test", "rating" => 1] ,["title" => "the good place", "rating" => 4.5]];
 

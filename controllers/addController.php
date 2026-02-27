@@ -3,14 +3,12 @@ require_once "./controllers/homeController.php";
 require_once "./Models/baseModel.php";
 require_once "./Models/seriesModel.php";
 require_once "./Models/moviesModel.php";
+require_once "./authentication/login.controller.php";
 
 class AddController extends HomeController {
-    private $conn;
-    public function __construct($conn) {
-        $this->conn = $conn;
-    }
 
     public function show() {
+ 
         //call model for dynamic form creation
         $model = $this->turnToClass("series");
         $model = new $model($this->conn);
@@ -20,6 +18,7 @@ class AddController extends HomeController {
     }
 
     public function add() {
+
         $resource = $_POST['media'];
         $_POST;
         echo $resource;

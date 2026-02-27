@@ -95,10 +95,6 @@ class Router {
                 }
                 break;
         }
-        
-        
-
-        // }
     }
 
     public function getRoute() {

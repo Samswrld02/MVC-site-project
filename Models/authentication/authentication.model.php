@@ -17,18 +17,10 @@ class Authentication {
 
         $result = $stmt->fetchALL();
 
-        //print_r($result);
-
         foreach ($result as $userEntry) {
             if ($loginData['username'] == $userEntry['user'] && $loginData['password'] == $userEntry["password"]) {
                 return true;
             }
-
-            // print_r($loginData);
-            // print_r($userEntry['user'] );
-            // print_r($userEntry['password']);
-            // exit;
-
         }
 
         return false;
